@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose a Platform</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(91, 33, 182, 0.3), transparent 35%),
+                radial-gradient(circle at bottom right, rgba(0, 119, 255, 0.25), transparent 35%),
+                linear-gradient(135deg, #070b17, #10182d);
+
+            color: white;
+            padding: 40px 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .heading h1 {
+            font-size: 38px;
+            margin-bottom: 12px;
+        }
+
+        .heading p {
+            color: #aeb8cc;
+            font-size: 17px;
+        }
+
+        /* Cards container */
+        .cards {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        /* Main card */
+        .card {
+            position: relative;
+            overflow: hidden;
+
+            width: 100%;
+            padding: 35px;
+
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+
+            background: rgba(255, 255, 255, 0.06);
+
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s ease,
+                border 0.3s ease,
+                box-shadow 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.09);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 30px rgba(91, 91, 255, 0.1);
+        }
+
+        /* Glow effect */
+        .card::before {
+            content: "";
+            position: absolute;
+
+            width: 250px;
+            height: 250px;
+
+            border-radius: 50%;
+
+            top: -120px;
+            right: -100px;
+
+            filter: blur(20px);
+            opacity: 0.18;
+
+            pointer-events: none;
+        }
+
+        .kosmi::before {
+            background: #7c3aed;
+        }
+
+        .kosmi {
+            border: 2px solid rgba(124, 58, 237, 0.8);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25), 0 0 24px rgba(124, 58, 237, 0.28);
+        }
+
+        .archive::before {
+            background: #0099ff;
+        }
+
+        .archive {
+            border: 2px solid rgba(0, 153, 255, 0.8);
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.25), 0 0 24px rgba(0, 153, 255, 0.28);
+        }
+
+        .register::before {
+            background: #22c55e;
+        }
+
+        /* Top section */
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            margin-bottom: 22px;
+        }
+
+        .icon {
+            width: 65px;
+            height: 65px;
+
+            min-width: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 18px;
+
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        .kosmi .icon {
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+        }
+
+        .archive .icon {
+            background: linear-gradient(135deg, #008cff, #00c6ff);
+        }
+
+        .register .icon {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+        }
+
+        .title-area h2 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .title-area span {
+            color: #aeb8cc;
+            font-size: 14px;
+        }
+
+        /* Description */
+        .description {
+            font-size: 16px;
+            line-height: 1.8;
+
+            color: #d5dbea;
+
+            margin-bottom: 28px;
+        }
+
+        /* Button */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            padding: 13px 22px;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+            font-weight: bold;
+
+            color: white;
+
+            transition: 0.3s;
+        }
+
+        .kosmi .button {
+            background: linear-gradient(135deg, #7c3aed, #4f46e5);
+        }
+
+        .archive .button {
+            background: linear-gradient(135deg, #0077ff, #00a8ff);
+        }
+
+        .register .button {
+            background: linear-gradient(135deg, #16a34a, #22c55e);
+        }
+
+        .tutorial-button {
+            margin-top: 14px;
+            background: rgba(0, 153, 255, 0.2);
+            border: 1px solid rgba(0, 198, 255, 0.7);
+        }
+
+        .card:hover .button {
+            transform: translateX(5px);
+        }
+
+        .arrow {
+            font-size: 20px;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+
+            body {
+                padding: 25px 14px;
+            }
+
+            .heading {
+                margin-bottom: 28px;
+            }
+
+            .heading h1 {
+                font-size: 28px;
+            }
+
+            .heading p {
+                font-size: 15px;
+            }
+
+            .card {
+                padding: 25px 20px;
+                border-radius: 20px;
+            }
+
+            .card-header {
+                gap: 15px;
+            }
+
+            .icon {
+                width: 55px;
+                height: 55px;
+                min-width: 55px;
+
+                font-size: 25px;
+                border-radius: 15px;
+            }
+
+            .title-area h2 {
+                font-size: 22px;
+            }
+
+            .description {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- Heading -->
+    <div class="heading">
+        <h1>Choose a Platform</h1>
+        <p>Select the service you would like to open.</p>
+    </div>
+
+
+    <div class="cards">
+
+        <!-- KOSMI -->
+        <div class="card kosmi" onclick="openKosmi()">
+
+            <div class="card-header">
+
+                <div class="icon">
+                    K
+                </div>
+
+                <div class="title-area">
+                    <h2>KOSMI</h2>
+                    <span>Virtual Rooms • Video • Chat • Games</span>
+                </div>
+
+            </div>
+
+
+            <div class="description">
+
+                Kosmi is an online virtual room platform that allows people
+                to connect and spend time together over the internet.
+
+                Users can create a virtual room and invite other people to
+                join using a link. Inside the room, users can communicate
+                through video and voice calls, text chat, and screen sharing.
+
+                They can also watch videos together, play games, and share
+                content with other people in the room.
+
+                Kosmi is designed to provide a shared online space where
+                friends, family, classmates, or groups can interact and
+                enjoy activities together.
+
+                It works mainly through a web browser, so users can join
+                rooms without needing to install a traditional desktop
+                application.
+
+                In simple terms, Kosmi combines video calling, chatting,
+                screen sharing, entertainment, and online activities into
+                one shared virtual room.
+
+            </div>
+
+
+            <div class="button">
+                Open Kosmi
+                <span class="arrow">→</span>
+            </div>
+
+        </div>
+
+
+        <!-- ACCOUNT REGISTRATION -->
+        <div class="card register" onclick="openRegistration()">
+
+            <div class="card-header">
+
+                <div class="icon">
+                    R
+                </div>
+
+                <div class="title-area">
+                    <h2>REGISTER ACCOUNTS</h2>
+                    <span>Kosmi • Internet Archive</span>
+                </div>
+
+            </div>
+
+
+            <div class="description">
+
+                Register your Kosmi and Internet Archive accounts to get
+                started with both platforms.
+
+                Connect your accounts to make your profile more visible and
+                discoverable.
+
+            </div>
+
+
+            <div class="button">
+                Register Your Kosmi and Internet Archive Accounts
+                <span class="arrow">→</span>
+            </div>
+
+        </div>
+
+
+        <!-- INTERNET ARCHIVE -->
+        <div class="card archive" onclick="openArchive()">
+
+            <div class="card-header">
+
+                <div class="icon">
+                    IA
+                </div>
+
+                <div class="title-area">
+                    <h2>INTERNET ARCHIVE</h2>
+                    <span>Books • Movies • Music • Websites • Software</span>
+                </div>
+
+            </div>
+
+
+            <div class="description">
+
+                Internet Archive is a free digital library that provides
+                access to millions of books, movies, music, websites,
+                software, images, and other digital materials.
+
+                It is a non-profit organization focused on preserving
+                digital content and making it available to people around
+                the world.
+
+                Users can search for and view or download many items,
+                depending on their availability and copyright restrictions.
+
+                Internet Archive also operates the Wayback Machine, which
+                allows users to view archived versions of websites from
+                the past.
+
+                It is widely used for research, education, historical
+                preservation, and accessing older digital content.
+
+            </div>
+
+
+            <div class="button">
+                Open Internet Archive
+                <span class="arrow">→</span>
+            </div>
+
+            <div class="button tutorial-button" onclick="openArchiveTutorial(event)">
+                View Internet Archive Tutorial
+                <span class="arrow">→</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // Open KOSMI page
+    function openKosmi() {
+        window.location.href = "https://kosmi.to/";
+    }
+
+
+    // Open account registration page
+    function openRegistration() {
+        window.location.href = "index3.html";
+    }
+
+
+    // Open Internet Archive page
+    function openArchive() {
+        window.location.href = "index2.html";
+    }
+
+
+    // Open the Internet Archive tutorial
+    function openArchiveTutorial(event) {
+        event.stopPropagation();
+        window.location.href = "https://files.catbox.moe/5d0c7i.pdf";
+    }
+
+</script>
+
+</body>
+</html>
